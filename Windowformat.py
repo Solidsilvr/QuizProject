@@ -2,6 +2,7 @@ import PySimpleGUI as sg
 font = ("Helvetica", 20)
 sg.set_options(font=font)
 Score=0
+timecount=30
 menu    =[[sg.Push(),sg.Text("Sree Narayana Public School Poothotta"),sg.Push()],
           [sg.Push(),sg.Text("ComputerScience Department"),sg.Push()],
           [sg.Text()],
@@ -15,8 +16,8 @@ menu    =[[sg.Push(),sg.Text("Sree Narayana Public School Poothotta"),sg.Push()]
           [sg.Button("ENGLISH",size=(25,1)),sg.Push(),sg.Button("@Solidsilvr",size=(9,1))],
           [sg.Button("GK",size=(25,1)),sg.Push(),sg.Button("QUIT",size=(9,1))]
           ]
-layout  =[[sg.Text("Question 1")],
-          [sg.Button("A"),sg.Button("B"),sg.Button("C"),sg.Button("D")]
+layout  =[[sg.Push(),sg.Text("Question 1"),sg.Push(),sg.Text(key="Timer",font="Courier 20",size=(27,1),justification='right')],
+          [sg.Push(),sg.Button("A"),sg.Button("B"),sg.Button("C"),sg.Button("D"),sg.Push()]
           ]
 layout2 =[[sg.Text("Question 2")],
           [sg.Button("A"),sg.Button("B"),sg.Button("C"),sg.Button("D")]
@@ -44,43 +45,47 @@ while True :
         import webbrowser
         webbrowser.open("https://github.com/Solidsilvr")
     elif event6 == "MATHS":
-        event , values = window.read()
-        if event == "A":
-            Score=Score+1
-            print(Score)
-            window.close()
-        elif event == "B" or event == "C" or event == "D":
-            window.close()
-        event2 , values2 = window2.read()
-        if event2 == "A":
-            Score=Score+1
-            print(Score)
-            window2.close()
-        elif event2 == "B" or event2 == "C" or event2 == "D":
-            window2.close()
-        event3 , values3 = window3.read()
-        if event3 == "A":
-            Score=Score+1
-            print(Score)
-            window3.close()
-        elif event3 == "B" or event3 == "C" or event3 == "D":
-            window3.close()
-        event4 , values4 = window4.read()
-        if event4 == "A":
-            Score=Score+1
-            print(Score)
-            window4.close()
-        elif event4 == "B" or event4 == "C" or event4 == "D":
-            window4.close()
-        event5 , values5 = window5.read()
-        if event5 == "A":
-            Score=Score+1
-            print(Score)
-            read="Your Score = 5/"+str(Score)+"\nReturn to Main Menu"
-            print(read)
-            window5.close()
-        elif event5 == "B" or event5 == "C" or event5 == "D":
-            window5.close()
-        if sg.popup_yes_no(read,no_titlebar=True,modal=True) == "Yes":
-            break
+        while timecount >= 0:
+            event , values = window.read(timeout=1000)
+            window["Timer"].update(timecount)
+            timecount=timecount-1
+            if event == "A":
+                Score=Score+1
+                print(Score)
+                break
+            elif event == "B" or event == "C" or event == "D":
+                break
+        window.close()
+    event2 , values2 = window2.read()
+    if event2 == "A":
+        Score=Score+1
+        print(Score)
+        window2.close()
+    elif event2 == "B" or event2 == "C" or event2 == "D":
+        window2.close()
+    event3 , values3 = window3.read()
+    if event3 == "A":
+        Score=Score+1
+        print(Score)
+        window3.close()
+    elif event3 == "B" or event3 == "C" or event3 == "D":
+        window3.close()
+    event4 , values4 = window4.read()
+    if event4 == "A":
+        Score=Score+1
+        print(Score)
+        window4.close()
+    elif event4 == "B" or event4 == "C" or event4 == "D":
+        window4.close()
+    event5 , values5 = window5.read()
+    if event5 == "A":
+        Score=Score+1
+        print(Score)
+        read="Your Score = "+str(Score)+"/5\nReturn to Main Menu"
+        print(read)
+        window5.close()
+    elif event5 == "B" or event5 == "C" or event5 == "D":
+        window5.close()
+    if sg.popup_yes_no(read,no_titlebar=True,modal=True) == "Yes":
+        break
 print("Done")
