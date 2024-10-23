@@ -1,22 +1,24 @@
 import PySimpleGUI as sg
 font = ("Helvetica", 20)
 sg.set_options(font=font)
+sg.theme("DarkAmber")
+sg.theme_background_color("#204969")
 Score=0
 timecount=30
-menu    =[[sg.Push(),sg.Text("Sree Narayana Public School Poothotta"),sg.Push()],
-          [sg.Push(),sg.Text("ComputerScience Department"),sg.Push()],
-          [sg.Text()],
-          [sg.Push(),sg.Text("Take A Quiz"),sg.Push()],
-          [sg.Text()],
-          [sg.Text("           Select A Category")],
-          [sg.Push(),sg.Slider((1,3),orientation="horizontal",size=(12,14))],
-          [sg.Button("MATHS",size=(25,1)),sg.Text("                                                                          Difficulty")],
-          [sg.Button("COMPUTER SCIENCE",size=(25,1)),sg.Push()],
-          [sg.Button("SCIENCE",size=(25,1)),sg.Push(),sg.Text("Follow Me On Github")],
-          [sg.Button("ENGLISH",size=(25,1)),sg.Push(),sg.Button("@Solidsilvr",size=(9,1))],
-          [sg.Button("GK",size=(25,1)),sg.Push(),sg.Button("QUIT",size=(9,1))]
+menu    =[[sg.Push(background_color="#204969"),sg.Text("Sree Narayana Public School Poothotta",background_color="#204969"),sg.Push(background_color="#204969")],
+          [sg.Push(background_color="#204969"),sg.Text("ComputerScience Department",background_color="#204969"),sg.Push(background_color="#204969")],
+          [sg.Text(background_color="#204969")],
+          [sg.Push(background_color="#204969"),sg.Text("Take A Quiz",background_color="#204969"),sg.Push(background_color="#204969")],
+          [sg.Text(background_color="#204969")],
+          [sg.Text("           Select A Category",background_color="#204969")],
+          [sg.Push(background_color="#204969"),sg.Slider((1,3),orientation="horizontal",size=(12,14),background_color="#204969")],
+          [sg.Button("MATHS",size=(25,1)),sg.Text("                                                                          Difficulty",background_color="#204969")],
+          [sg.Button("COMPUTER SCIENCE",size=(25,1)),sg.Push(background_color="#204969")],
+          [sg.Button("SCIENCE",size=(25,1)),sg.Push(background_color="#204969"),sg.Text("Follow Me On Github",background_color="#204969")],
+          [sg.Button("ENGLISH",size=(25,1)),sg.Push(background_color="#204969"),sg.Button("@Solidsilvr",size=(9,1))],
+          [sg.Button("GK",size=(25,1)),sg.Push(background_color="#204969"),sg.Button("QUIT",size=(9,1))]
           ]
-layout  =[[sg.Push(),sg.Text("Question 1"),sg.Push(),sg.Text(key="Timer",font="Courier 20",size=(27,1),justification='right')],
+layout  =[[sg.Push(),sg.Text("Question 1"),sg.Push(),sg.Text(key="Timer",font="Courier 24 bold",text_color="white",size=(6,1),justification='right')],
           [sg.Push(),sg.Button("A"),sg.Button("B"),sg.Button("C"),sg.Button("D"),sg.Push()]
           ]
 layout2 =[[sg.Text("Question 2")],
