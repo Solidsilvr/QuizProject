@@ -10,6 +10,7 @@ kot_menu=True
 
 timecount=30
 Score=0
+Exit_code= "|          QUIT          |\n"
 
 background_layout=[[sg.Image(source="Background_image.png")]]
 window_background = sg.Window('Background', background_layout, no_titlebar=True, finalize=fin_bg_menu, margins=(0, 0), element_padding=(0,0))
@@ -32,12 +33,19 @@ qz_win = sg.Window("Quiz Window",qz_lo)
 while True:
     window, event, values = sg.read_all_windows()
     print(event, values)
-    if event in ("QUIT","MATHS","SCIENCE","ENGLISH","COMPUTER SCIENCE","GK"):
+    if event in ("QUIT","MATHS","SCIENCE","ENGLISH","COMPUTER SCIENCE","GK","@Solidsilvr"):
         print(f'closing window = {window.Title}')
         menuwin.close()
         window_background.close()
         fin_bg_menu=False
         kot_menu=False
+    if event == "QUIT":
+        break
+    if event == "@Solidsilvr":
+        import webbrowser
+        webbrowser.open("https://github.com/Solidsilvr")
+        if sg.popup(Exit_code,button_justification='c') in ("OK",sg.WIN_CLOSED):
+            break
     if event == "MATHS": 
         while timecount >= 0:
             event2 , values2 = qz_win.read(timeout=1000)
@@ -46,8 +54,8 @@ while True:
             if event2 == "A":
                 Score=Score+1
                 break
-    qz_win.close()
-    read="Your Score = "+str(Score)+"/5\nReturn to Main Menu"
-    if sg.popup_yes_no(read,no_titlebar=True,modal=True) == "Yes":
+        qz_win.close()
+        read="Your Score = "+str(Score)+"/5\nReturn to Main Menu"
+        if sg.popup_yes_no(read,no_titlebar=True,modal=True) == "Yes":
+            break
         break
-    break
