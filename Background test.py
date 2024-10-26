@@ -10,6 +10,7 @@ kot_menu=True
 
 timecount=30
 Score=0
+loopbreaker1=True
 Exit_code= "|          QUIT          |\n"
 
 background_layout=[[sg.Image(source="Background_image.png")]]
@@ -26,10 +27,18 @@ menu    =[[sg.Push(),sg.Text("Sree Narayana Public School Poothotta",font="Verda
           [sg.Button("GK",size=(25,1)),sg.Push(),sg.Button("QUIT",size=(9,1))]
           ]
 menuwin = sg.Window("Main Menu",menu,size=(1200,620),finalize=fin_bg_menu, keep_on_top=kot_menu, grab_anywhere=False,  transparent_color=sg.theme_background_color(), no_titlebar=True)
-qz_lo  =[[sg.Push(),sg.Text("Question 1"),sg.Push(),sg.Text(key="Timer",font="Courier 24 bold",text_color="white",size=(6,1),justification='right')],
-          [sg.Push(),sg.Button("A"),sg.Button("B"),sg.Button("C"),sg.Button("D"),sg.Push()]
+qz_lo  =[[sg.Text("Question 1",pad=((9,0),(11,0))),sg.Push(),sg.Text(key="Timer",font="Courier 24 bold",text_color="white",size=(6,1),justification='right',pad=((0,9),(11,0)))],
+         [sg.VPush()],
+         [sg.Push(),sg.Button("A",size=(15,1),pad=((8,5),(0,9))),sg.Button("B",size=(15,1),pad=(5,(0,9))),sg.Button("C",size=(15,1),pad=(5,(0,9))),sg.Button("D",size=(15,1),pad=((5,7),(0,9))),sg.Push()]
           ]
-qz_win = sg.Window("Quiz Window",qz_lo)
+qz_win = sg.Window("Quiz Window",qz_lo,size=(1120,199),no_titlebar=True)
+sc_lo  =[[sg.Push(),sg.Text("Your Score = ",font="Helvetica 22",pad=((5,0),(8,0))),sg.Text(key="-score-",font="Helvetica 22",justification='c',pad=((1,2),(8,0))),sg.Text("/ 5",font="Helvetica 22",pad=((1,5),(8,0))),sg.Push()],
+         [sg.Push(),sg.Text("Return To Main Menu",font="Helvetica 22"),sg.Push()],
+         [sg.VPush()],
+         [sg.Push(),sg.Button("RESET",size=(8,1),pad=(10,5)),sg.Button("QUIT",size=(8,1),pad=(10,5)),sg.Push()]
+          ]
+sc_win = sg.Window("Score Window",sc_lo,size=(540,165),no_titlebar=True)
+
 while True:
     window, event, values = sg.read_all_windows()
     print(event, values)
@@ -55,7 +64,11 @@ while True:
                 Score=Score+1
                 break
         qz_win.close()
-        read="Your Score = "+str(Score)+"/5\nReturn to Main Menu"
-        if sg.popup_yes_no(read,no_titlebar=True,modal=True) == "Yes":
-            break
+        while loopbreaker1 == True:
+            scev , scva = sc_win.read(timeout=1000)
+            sc_win["-score-"].update(Score)
+            if scev == "QUIT":
+                sc_win.close()
+                loopbreaker1=False
+                break
         break
