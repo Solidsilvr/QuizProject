@@ -15,7 +15,55 @@ Score=0
 loopbreaker1=True
 loopbreaker0=True
 loopbreaker2=True
-Exit_code= "|          QUIT          |\n"
+Pushfall0=True
+Pushfall1=True
+Pushfall2=True
+Rd_fixdex=[]
+Rd_loopfix_E=1
+
+Quest_E=["This is the placeholder text for question 1 Easy",
+         "This is the placeholder text for question 2 Easy",
+         "This is the placeholder text for question 3 Easy",
+         "This is the placeholder text for question 4 Easy",
+         "This is the placeholder text for question 5 Easy",
+         "This is the placeholder text for question 6 Easy",
+         "This is the placeholder text for question 7 Easy",
+         "This is the placeholder text for question 8 Easy",
+         "This is the placeholder text for question 9 Easy",
+         "This is the placeholder text for question 10 Easy"]
+
+Opt_E=[["Option 1 Placeholder","Option 2 Placeholder","Option 3 Placeholder","Option 4 Placeholder"],
+       ["Option 1 Placeholder","Option 2 Placeholder","Option 3 Placeholder","Option 4 Placeholder"],
+       ["Option 1 Placeholder","Option 2 Placeholder","Option 3 Placeholder","Option 4 Placeholder"],
+       ["Option 1 Placeholder","Option 2 Placeholder","Option 3 Placeholder","Option 4 Placeholder"],
+       ["Option 1 Placeholder","Option 2 Placeholder","Option 3 Placeholder","Option 4 Placeholder"],
+       ["Option 1 Placeholder","Option 2 Placeholder","Option 3 Placeholder","Option 4 Placeholder"],
+       ["Option 1 Placeholder","Option 2 Placeholder","Option 3 Placeholder","Option 4 Placeholder"],
+       ["Option 1 Placeholder","Option 2 Placeholder","Option 3 Placeholder","Option 4 Placeholder"],
+       ["Option 1 Placeholder","Option 2 Placeholder","Option 3 Placeholder","Option 4 Placeholder"],
+       ["Option 1 Placeholder","Option 2 Placeholder","Option 3 Placeholder","Option 4 Placeholder"]]
+
+Ans_E=["A",
+       "B",
+       "C",
+       "D",
+       "A",
+       "B",
+       "C",
+       "D",
+       "A",
+       "B"]
+
+Wr_Ans_E=[["B","C","D"],
+          ["A","C","D"],
+          ["A","B","D"],
+          ["A","B","C"],
+          ["B","C","D"],
+          ["A","C","D"],
+          ["A","B","D"],
+          ["A","B","C"],
+          ["B","C","D"],
+          ["A","C","D"]]
 
 background_layout=[[sg.Image(source="Background_image.png")]]
 window_background = sg.Window('Background', background_layout, no_titlebar=True, finalize=fin_menu, margins=(0, 0), element_padding=(0,0))
@@ -36,9 +84,10 @@ menuwin = sg.Window("Main Menu",menu,size=(1200,620),finalize=fin_menu, keep_on_
 qz_bg_lo=[[sg.Image(source="qz_bg_image.png")]]
 qz_bg_win=sg.Window('qz_Background', qz_bg_lo, no_titlebar=True, finalize=fin_qz, margins=(0, 0), element_padding=(0,0))
 
-qz_lo  =[[sg.Text("Question 1",pad=((9,0),(11,0))),sg.Push(),sg.Text(key="Timer",font="Verdana 26 italic",text_color="white",size=(6,1),justification='right',pad=((0,9),(11,0)))],
+qz_lo  =[[sg.Text("Question",pad=((9,0),(11,0))),sg.Text(key="QuizNum",pad=((2,0),(11,0))),sg.Push(),sg.Text(key="Timer",font="Verdana 26 italic",text_color="white",size=(6,1),justification='right',pad=((0,9),(11,0)))],
+         [sg.Text(key="-Question-",pad=((9,0),(4,0))),sg.Push()],
          [sg.VPush()],
-         [sg.Push(),sg.Button("A",size=(15,1),pad=((8,5),(0,9))),sg.Button("B",size=(15,1),pad=(5,(0,9))),sg.Button("C",size=(15,1),pad=(5,(0,9))),sg.Button("D",size=(15,1),pad=((5,7),(0,9))),sg.Push()]
+         [sg.Push(),sg.Button(key="A",size=(15,1),pad=((8,5),(0,9))),sg.Button(key="B",size=(15,1),pad=(5,(0,9))),sg.Button(key="C",size=(15,1),pad=(5,(0,9))),sg.Button(key="D",size=(15,1),pad=((5,7),(0,9))),sg.Push()]
           ]
 qz_win = sg.Window("Quiz Window",qz_lo,size=(1120,199),no_titlebar=True,finalize=fin_qz,keep_on_top=True,grab_anywhere=False,transparent_color=sg.theme_background_color(),modal=True)
 
@@ -59,13 +108,12 @@ quit_lo=[[sg.VPush()],
          [sg.Push(),sg.Text("QUITTING",font="Verdana 24 italic"),sg.Push()],
          [sg.VPush()]
           ]
-quit_win = sg.Window("Score Window",quit_lo,size=(240,165),no_titlebar=True,finalize=fin_quit,keep_on_top=False,transparent_color=sg.theme_background_color(),grab_anywhere=False)
+quit_win = sg.Window("Quit Window",quit_lo,size=(240,165),no_titlebar=True,finalize=fin_quit,keep_on_top=False,transparent_color=sg.theme_background_color(),grab_anywhere=False)
 
 while True:
     window, event, values = sg.read_all_windows()
     print(event, values)
     if event in ("QUIT","MATHS","SCIENCE","ENGLISH","COMPUTER SCIENCE","GK","@Solidsilvr"):
-        print(f'closing window = {window.Title}')
         menuwin.close()
         window_background.close()
         fin_bg_menu=False
@@ -82,22 +130,46 @@ while True:
             quit_win.close()
             loopbreaker2=False        
             break
-    if event == "MATHS": 
+    if event in ("MATHS","SCIENCE","COMPUTER SCIENCE","ENGLISH","GK"): 
         fin_qz=True
+        import random as rd
         while loopbreaker0 == True:
             qz_bg_ev, qz_bg_va = qz_bg_win.read(timeout=10)
-            while timecount >= 0:
-                event2 , values2 = qz_win.read(timeout=1000)
-                qz_win["Timer"].update(timecount)
-                timecount=timecount-1
-                if event2 == "A":
-                    Score=Score+1
+            while Rd_loopfix_E <= 5:
+                Rd_Num=rd.randint(0,9)
+                if Rd_Num not in Rd_fixdex:                   
+                    Rd_fixdex.append(Rd_Num)    
+                    while timecount >= 0:
+                        event2 , values2 = qz_win.read(timeout=1000)
+                        qz_win["Timer"].update(timecount)
+                        timecount=timecount-1
+                        if (event2 == Ans_E[Rd_Num]):
+                            Score=Score+1
+                            break
+                        elif (event2 in Wr_Ans_E[Rd_Num]):
+                            break
+                        if Pushfall0 == True:
+                            qz_win["QuizNum"].update(Rd_loopfix_E)
+                            qz_win["-Question-"].update(Quest_E[Rd_Num])
+                            qz_win["A"].update(Opt_E[Rd_Num][0])  
+                            qz_win["B"].update(Opt_E[Rd_Num][1])
+                            qz_win["C"].update(Opt_E[Rd_Num][2])
+                            qz_win["D"].update(Opt_E[Rd_Num][3])
+                            Pushfall0=False
+                else:
+                    continue
+                Rd_loopfix_E += 1
+                if Rd_loopfix_E <= 5:
+                    Pushfall0=True
+                    timecount=30
+                    continue
+                else:
                     break
             qz_win.close()
             qz_bg_win.close()
             loopbreaker0=False
-            fin_qz=False
             break
+        fin_qz=False
         while loopbreaker1 == True:
             fin_sc=True
             sc_bg_ev, sc_bg_va = sc_bg_win(timeout=10)
