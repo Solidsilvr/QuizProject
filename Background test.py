@@ -1,6 +1,5 @@
 import PySimpleGUI as sg
-font = ("Helvetica", 20)
-sg.set_options(font=font)
+sg.set_options(font=("Helvetica", 20))
 sg.theme("LightPurple")
 sg.Window._move_all_windows = True
 sg.theme_background_color("#B0AAC2")
@@ -11,6 +10,7 @@ fin_sc=False
 fin_quit=False
 
 timecount=30
+tickcount=60
 Score=0
 loopbreaker1=True
 loopbreaker0=True
@@ -140,9 +140,16 @@ while True:
                 if Rd_Num not in Rd_fixdex:                   
                     Rd_fixdex.append(Rd_Num)    
                     while timecount >= 0:
-                        event2 , values2 = qz_win.read(timeout=1000)
-                        qz_win["Timer"].update(timecount)
-                        timecount=timecount-1
+                        event2 , values2 = qz_win.read(timeout=500)
+                        if Pushfall1 == True:
+                            qz_win["Timer"].update(timecount)
+                            Pushfall1=False
+                        tickcount=tickcount-1
+                        if tickcount%2 == 0:    
+                            timecount=timecount-1
+                            qz_win["Timer"].update(timecount)
+                            if timecount == 0:
+                                break
                         if (event2 == Ans_E[Rd_Num]):
                             Score=Score+1
                             break
@@ -161,6 +168,7 @@ while True:
                 Rd_loopfix_E += 1
                 if Rd_loopfix_E <= 5:
                     Pushfall0=True
+                    Pushfall1=True
                     timecount=30
                     continue
                 else:
