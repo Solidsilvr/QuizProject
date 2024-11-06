@@ -163,35 +163,6 @@ Quest_GK_H=   ["This is the placeholder text for question GK 1 Hard",
                "This is the placeholder text for question GK 9 Hard",
                "This is the placeholder text for question GK 10 Hard"]
 
-def Question_Cache(EV):
-    if EV == "MATHS":
-        Quest_Maths_E.extend(Quest_Maths_M)
-        Quest_Maths_E.extend(Quest_Maths_H)
-        Quest_Maths=Quest_Maths_E.copy()
-        print(Quest_Maths)
-    elif EV == "COMPUTER SCIENCE":
-        Quest_CS_E.extend(Quest_CS_M)
-        Quest_CS_E.extend(Quest_CS_H)
-        Quest_CS=Quest_CS_E.copy()
-        print(Quest_CS)
-    elif EV == "SCIENCE":
-        Quest_SC_E.extend(Quest_SC_M)
-        Quest_SC_E.extend(Quest_SC_H)
-        Quest_SC=Quest_SC_E.copy()
-        print(Quest_SC)
-    elif EV == "ENGLISH":
-        Quest_Eg_E.extend(Quest_Eg_M)
-        Quest_Eg_E.extend(Quest_Eg_H)
-        Quest_Eg=Quest_Eg_E.copy()
-        print(Quest_Eg)
-    elif EV == "GK":
-        Quest_GK_E.extend(Quest_GK_M)
-        Quest_GK_E.extend(Quest_GK_H)
-        Quest_GK=Quest_GK_E.copy()
-        print(Quest_GK)
-    else:
-        print("WTF")
-
 Opt_Maths_E=[["Option 1 Placeholder","Option 2 Placeholder","Option 3 Placeholder","Option 4 Placeholder"],
              ["Option 1 Placeholder","Option 2 Placeholder","Option 3 Placeholder","Option 4 Placeholder"],
              ["Option 1 Placeholder","Option 2 Placeholder","Option 3 Placeholder","Option 4 Placeholder"],

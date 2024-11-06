@@ -12,58 +12,19 @@ fin_quit=False
 timecount=30
 tickcount=60
 Score=0
+Total_E=5
+Total_M=10
+Total_H=15
 loopbreaker1=True
 loopbreaker0=True
 loopbreaker2=True
+loopbreaker3=True
 Pushfall0=True
 Pushfall1=True
-Pushfall2=True
-Rd_fixdex=[]
+Rd_fixdex_E=[]
+Rd_fixdex_M=[]
+Rd_fixdex_H=[]
 Rd_loopfix_E=1
-
-Quest_E=["This is the placeholder text for question 1 Easy",
-         "This is the placeholder text for question 2 Easy",
-         "This is the placeholder text for question 3 Easy",
-         "This is the placeholder text for question 4 Easy",
-         "This is the placeholder text for question 5 Easy",
-         "This is the placeholder text for question 6 Easy",
-         "This is the placeholder text for question 7 Easy",
-         "This is the placeholder text for question 8 Easy",
-         "This is the placeholder text for question 9 Easy",
-         "This is the placeholder text for question 10 Easy"]
-
-Opt_E=[["Option 1 Placeholder","Option 2 Placeholder","Option 3 Placeholder","Option 4 Placeholder"],
-       ["Option 1 Placeholder","Option 2 Placeholder","Option 3 Placeholder","Option 4 Placeholder"],
-       ["Option 1 Placeholder","Option 2 Placeholder","Option 3 Placeholder","Option 4 Placeholder"],
-       ["Option 1 Placeholder","Option 2 Placeholder","Option 3 Placeholder","Option 4 Placeholder"],
-       ["Option 1 Placeholder","Option 2 Placeholder","Option 3 Placeholder","Option 4 Placeholder"],
-       ["Option 1 Placeholder","Option 2 Placeholder","Option 3 Placeholder","Option 4 Placeholder"],
-       ["Option 1 Placeholder","Option 2 Placeholder","Option 3 Placeholder","Option 4 Placeholder"],
-       ["Option 1 Placeholder","Option 2 Placeholder","Option 3 Placeholder","Option 4 Placeholder"],
-       ["Option 1 Placeholder","Option 2 Placeholder","Option 3 Placeholder","Option 4 Placeholder"],
-       ["Option 1 Placeholder","Option 2 Placeholder","Option 3 Placeholder","Option 4 Placeholder"]]
-
-Ans_E=["A",
-       "B",
-       "C",
-       "D",
-       "A",
-       "B",
-       "C",
-       "D",
-       "A",
-       "B"]
-
-Wr_Ans_E=[["B","C","D"],
-          ["A","C","D"],
-          ["A","B","D"],
-          ["A","B","C"],
-          ["B","C","D"],
-          ["A","C","D"],
-          ["A","B","D"],
-          ["A","B","C"],
-          ["B","C","D"],
-          ["A","C","D"]]
 
 background_layout=[[sg.Image(source="Background_image.png")]]
 window_background = sg.Window('Background', background_layout, no_titlebar=True, finalize=fin_menu, margins=(0, 0), element_padding=(0,0))
@@ -94,7 +55,7 @@ qz_win = sg.Window("Quiz Window",qz_lo,size=(1120,199),no_titlebar=True,finalize
 sc_bg_lo=[[sg.Image(source="sc_bg_image.png")]]
 sc_bg_win=sg.Window('sc_Background', sc_bg_lo, no_titlebar=True, finalize=fin_sc, margins=(0, 0), element_padding=(0,0))
 
-sc_lo  =[[sg.Push(),sg.Text("Your Score = ",font="Helvetica 22",pad=((5,0),(8,0))),sg.Text(key="-score-",font="Helvetica 22",justification='c',pad=((1,2),(8,0))),sg.Text("/ 5",font="Helvetica 22",pad=((1,5),(8,0))),sg.Push()],
+sc_lo  =[[sg.Push(),sg.Text("Your Score = ",font="Helvetica 22",pad=((5,0),(8,0))),sg.Text(key="-score-",font="Helvetica 22",justification='c',pad=((1,3),(8,0))),sg.Text("/",font="Helvetica 22",pad=((2,2),(8,0))),sg.Text(key="-Total-",font="Helvetica 22",justification='c',pad=((0,5),(8,0))),sg.Push()],
          [sg.Push(),sg.Text("Return To Main Menu",font="Helvetica 22"),sg.Push()],
          [sg.VPush()],
          [sg.Push(),sg.Button("RESET",size=(8,1),pad=(10,5)),sg.Button("QUIT",size=(8,1),pad=(10,5)),sg.Push()]
@@ -132,47 +93,111 @@ while True:
             break
     if event in ("MATHS","SCIENCE","COMPUTER SCIENCE","ENGLISH","GK"): 
         fin_qz=True
+        if event == "MATHS":
+            import Quest_Maths as Qst
+        elif event == "COMPUTER SCIENCE":
+            import Quest_CS as Qst
+        elif event == "SCIENCE":
+            import Quest_SC as Qst
+        elif event == "ENGLISH":
+            import Quest_Eg as Qst
+        elif event == "GK":
+            import Quest_GK as Qst
         import random as rd
         while loopbreaker0 == True:
             qz_bg_ev, qz_bg_va = qz_bg_win.read(timeout=10)
-            while Rd_loopfix_E <= 5:
-                Rd_Num=rd.randint(0,9)
-                if Rd_Num not in Rd_fixdex:                   
-                    Rd_fixdex.append(Rd_Num)    
-                    while timecount >= 0:
-                        event2 , values2 = qz_win.read(timeout=500)
-                        if Pushfall1 == True:
-                            qz_win["Timer"].update(timecount)
-                            Pushfall1=False
-                        tickcount=tickcount-1
-                        if tickcount%2 == 0:    
-                            timecount=timecount-1
-                            qz_win["Timer"].update(timecount)
-                            if timecount == 0:
-                                break
-                        if (event2 == Ans_E[Rd_Num]):
-                            Score=Score+1
+            while loopbreaker3 == True:
+                if (Rd_loopfix_E >= 1 and Rd_loopfix_E <= 5):
+                    Rd_Num=rd.randint(0,9)
+                    if Rd_Num not in Rd_fixdex_E:                   
+                        Rd_fixdex_E.append(Rd_Num)
+                    else:
+                        continue
+                elif (Rd_loopfix_E >= 6 and Rd_loopfix_E <= 10):
+                    Rd_Num=rd.randint(10,19)
+                    if Rd_Num not in Rd_fixdex_M:                   
+                        Rd_fixdex_M.append(Rd_Num)
+                    else:
+                        continue
+                elif (Rd_loopfix_E >= 11 and Rd_loopfix_E <= 15):
+                    Rd_Num=rd.randint(20,29)
+                    if Rd_Num not in Rd_fixdex_H:                   
+                        Rd_fixdex_H.append(Rd_Num)
+                    else:
+                        continue    
+                while timecount >= 0:
+                    event2 , values2 = qz_win.read(timeout=500)
+                    if Pushfall1 == True:
+                        qz_win["Timer"].update(timecount)
+                        Pushfall1=False
+                    tickcount=tickcount-1
+                    if tickcount%2 == 0:    
+                        timecount=timecount-1
+                        qz_win["Timer"].update(timecount)
+                        if timecount == 0:
                             break
-                        elif (event2 in Wr_Ans_E[Rd_Num]):
-                            break
-                        if Pushfall0 == True:
-                            qz_win["QuizNum"].update(Rd_loopfix_E)
-                            qz_win["-Question-"].update(Quest_E[Rd_Num])
-                            qz_win["A"].update(Opt_E[Rd_Num][0])  
-                            qz_win["B"].update(Opt_E[Rd_Num][1])
-                            qz_win["C"].update(Opt_E[Rd_Num][2])
-                            qz_win["D"].update(Opt_E[Rd_Num][3])
-                            Pushfall0=False
-                else:
-                    continue
+                    if (event2 == Qst.Ans[Rd_Num]):
+                        Score=Score+1
+                        break
+                    elif (event2 in Qst.Wr_Ans[Rd_Num]):
+                        break
+                    if Pushfall0 == True:
+                        qz_win["QuizNum"].update(Rd_loopfix_E)
+                        qz_win["-Question-"].update(Qst.Quest[Rd_Num])
+                        qz_win["A"].update(Qst.Opt[Rd_Num][0])  
+                        qz_win["B"].update(Qst.Opt[Rd_Num][1])
+                        qz_win["C"].update(Qst.Opt[Rd_Num][2])
+                        qz_win["D"].update(Qst.Opt[Rd_Num][3])
+                        Pushfall0=False
                 Rd_loopfix_E += 1
-                if Rd_loopfix_E <= 5:
-                    Pushfall0=True
-                    Pushfall1=True
-                    timecount=30
-                    continue
-                else:
-                    break
+                if values == {0: 1.0}:
+                    if (Rd_loopfix_E <= 5 and Rd_loopfix_E >= 1):
+                        Pushfall0=True
+                        Pushfall1=True
+                        timecount=30
+                        tickcount=60
+                        continue
+                    else:
+                        loopbreaker3 = False
+                        break
+                elif values == {0: 2.0}:
+                    if (Rd_loopfix_E <= 5 and Rd_loopfix_E >= 1):
+                        Pushfall0=True
+                        Pushfall1=True
+                        timecount=30
+                        tickcount=60
+                        continue
+                    elif (Rd_loopfix_E <= 10 and Rd_loopfix_E >= 6):
+                        Pushfall0=True
+                        Pushfall1=True
+                        timecount=30
+                        tickcount=60
+                        continue
+                    else:
+                        loopbreaker3 = False
+                        break
+                elif values == {0: 3.0}:
+                    if (Rd_loopfix_E <= 5 and Rd_loopfix_E >= 1):
+                        Pushfall0=True
+                        Pushfall1=True
+                        timecount=30
+                        tickcount=60
+                        continue
+                    elif (Rd_loopfix_E <= 10 and Rd_loopfix_E >= 6):
+                        Pushfall0=True
+                        Pushfall1=True
+                        timecount=30
+                        tickcount=60
+                        continue
+                    elif (Rd_loopfix_E <= 15 and Rd_loopfix_E >= 11):
+                        Pushfall0=True
+                        Pushfall1=True
+                        timecount=30
+                        tickcount=60
+                        continue
+                    else:
+                        loopbreaker3 = False
+                        break
             qz_win.close()
             qz_bg_win.close()
             loopbreaker0=False
@@ -181,7 +206,13 @@ while True:
         while loopbreaker1 == True:
             fin_sc=True
             sc_bg_ev, sc_bg_va = sc_bg_win(timeout=10)
-            scev , scva = sc_win.read(timeout=1000)
+            scev , scva = sc_win.read(timeout=500)
+            if values == {0: 1.0}:
+                sc_win["-Total-"].update(Total_E)
+            elif values == {0: 2.0}:
+                sc_win["-Total-"].update(Total_M)
+            elif values == {0: 3.0}:
+                sc_win["-Total-"].update(Total_H)
             sc_win["-score-"].update(Score)
             if scev == "QUIT":
                 sc_win.close()
@@ -189,4 +220,3 @@ while True:
                 loopbreaker1=False
                 break
         break
-    break
