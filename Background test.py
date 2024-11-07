@@ -40,7 +40,7 @@ menu    =[[sg.Push(),sg.Text("Sree Narayana Public School Poothotta",font="Verda
           [sg.Button("ENGLISH",size=(25,1)),sg.Push(),sg.Button("@Solidsilvr",size=(9,1))],
           [sg.Button("GK",size=(25,1)),sg.Push(),sg.Button("QUIT",size=(9,1))]
           ]
-menuwin = sg.Window("Main Menu",menu,size=(1200,620),finalize=fin_menu, keep_on_top=True, grab_anywhere=False,  transparent_color=sg.theme_background_color(), no_titlebar=True,modal=True)
+menuwin = sg.Window("Main Menu",menu,size=(1280,720),finalize=fin_menu, keep_on_top=True, grab_anywhere=False,  transparent_color=sg.theme_background_color(), no_titlebar=True,modal=True)
 
 qz_bg_lo=[[sg.Image(source="qz_bg_image.png")]]
 qz_bg_win=sg.Window('qz_Background', qz_bg_lo, no_titlebar=True, finalize=fin_qz, margins=(0, 0), element_padding=(0,0))
@@ -50,26 +50,20 @@ qz_lo  =[[sg.Text("Question",pad=((9,0),(11,0))),sg.Text(key="QuizNum",pad=((2,0
          [sg.VPush()],
          [sg.Push(),sg.Button(key="A",size=(15,1),pad=((8,5),(0,9))),sg.Button(key="B",size=(15,1),pad=(5,(0,9))),sg.Button(key="C",size=(15,1),pad=(5,(0,9))),sg.Button(key="D",size=(15,1),pad=((5,7),(0,9))),sg.Push()]
           ]
-qz_win = sg.Window("Quiz Window",qz_lo,size=(1120,199),no_titlebar=True,finalize=fin_qz,keep_on_top=True,grab_anywhere=False,transparent_color=sg.theme_background_color(),modal=True)
+qz_win = sg.Window("Quiz Window",qz_lo,size=(1280,386),no_titlebar=True,finalize=fin_qz,keep_on_top=True,grab_anywhere=False,transparent_color=sg.theme_background_color(),modal=True)
 
 sc_bg_lo=[[sg.Image(source="sc_bg_image.png")]]
 sc_bg_win=sg.Window('sc_Background', sc_bg_lo, no_titlebar=True, finalize=fin_sc, margins=(0, 0), element_padding=(0,0))
 
-sc_lo  =[[sg.Push(),sg.Text("Your Score = ",font="Helvetica 22",pad=((5,0),(8,0))),sg.Text(key="-score-",font="Helvetica 22",justification='c',pad=((1,3),(8,0))),sg.Text("/",font="Helvetica 22",pad=((2,2),(8,0))),sg.Text(key="-Total-",font="Helvetica 22",justification='c',pad=((0,5),(8,0))),sg.Push()],
+sc_lo  =[[sg.Push(),sg.Text("Your Score = ",font="Helvetica 22",pad=((5,0),(16,0))),sg.Text(key="-score-",font="Helvetica 22",justification='c',pad=((1,3),(16,0))),sg.Text("/",font="Helvetica 22",pad=((2,2),(16,0))),sg.Text(key="-Total-",font="Helvetica 22",justification='c',pad=((0,5),(16,0))),sg.Push()],
          [sg.Push(),sg.Text("Return To Main Menu",font="Helvetica 22"),sg.Push()],
          [sg.VPush()],
-         [sg.Push(),sg.Button("RESET",size=(8,1),pad=(10,5)),sg.Button("QUIT",size=(8,1),pad=(10,5)),sg.Push()]
+         [sg.Push(),sg.Button("RESET",size=(8,1),pad=(10,12)),sg.Button("QUIT",size=(8,1),pad=(10,12)),sg.Push()]
           ]
-sc_win = sg.Window("Score Window",sc_lo,size=(540,165),no_titlebar=True,finalize=fin_sc,keep_on_top=True,transparent_color=sg.theme_background_color(),grab_anywhere=False,modal=True)
+sc_win = sg.Window("Score Window",sc_lo,size=(861,524),no_titlebar=True,finalize=fin_sc,keep_on_top=True,transparent_color=sg.theme_background_color(),grab_anywhere=False,modal=True)
 
 quit_bg_lo=[[sg.Image(source="quitsc_bg_image.png")]]
-quit_bg_win=sg.Window('quitsc_Background', quit_bg_lo, no_titlebar=True, finalize=fin_quit, margins=(0, 0), element_padding=(0,0))
-
-quit_lo=[[sg.VPush()],
-         [sg.Push(),sg.Text("QUITTING",font="Verdana 24 italic"),sg.Push()],
-         [sg.VPush()]
-          ]
-quit_win = sg.Window("Quit Window",quit_lo,size=(240,165),no_titlebar=True,finalize=fin_quit,keep_on_top=False,transparent_color=sg.theme_background_color(),grab_anywhere=False)
+quit_bg_win=sg.Window('quitsc_Background', quit_bg_lo, no_titlebar=True, finalize=fin_quit, margins=(0, 0), element_padding=(0,0),keep_on_top=fin_quit)
 
 while True:
     window, event, values = sg.read_all_windows()
@@ -85,10 +79,8 @@ while True:
             fin_quit=True
             import webbrowser
             webbrowser.open("https://github.com/Solidsilvr")
-            quit_bg_ev, quit_bg_va = quit_bg_win.read(timeout=10)
-            quit_ev, quit_va = quit_win.read(timeout=3000)
+            quit_bg_ev, quit_bg_va = quit_bg_win.read(timeout=3000)
             quit_bg_win.close()
-            quit_win.close()
             loopbreaker2=False        
             break
     if event in ("MATHS","SCIENCE","COMPUTER SCIENCE","ENGLISH","GK"): 
@@ -220,3 +212,4 @@ while True:
                 loopbreaker1=False
                 break
         break
+    break
