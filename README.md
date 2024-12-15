@@ -7,7 +7,7 @@
 1. python 3(ofcourse) - {Python 3.12 is recommended}
 
 -------------------------------------------------------------
-   -----         pip install the modules            -----
+   ----         pip install the modules            ----
 -------------------------------------------------------------
   ( Reinstall python if you don't have the pip extension )
 
