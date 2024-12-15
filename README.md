@@ -1,29 +1,33 @@
 	
-	           |--------README-------|
+|--------README-------|
 
 
-	            {	 PRE-REQUISITES:	}
+{	 PRE-REQUISITES:       }
 
 1. python 3(ofcourse) - {Python 3.12 is recommended}
 
 -------------------------------------------------------------
-	              pip install the modules
+   -----         pip install the modules            -----
 -------------------------------------------------------------
   ( Reinstall python if you don't have the pip extension )
 
-2. PySimpleGUI - pip code = {python -m pip install pysimplegui}
+2. PySimpleGUI -
 
-3. pygame2.5.2 - pip code = {python -m pip install -U pygame==2.5.2 --user}
+		python -m pip install pysimplegui
 
-		             ----- IMPORTANT -----
+3. pygame2.5.2 - 
+
+		python -m pip install -U pygame==2.5.2 --user
+
+----- IMPORTANT -----
 
 If you don't want the annoying "Free trial" thingy , Register for a hobbyist license at 
 			https://pysimplegui.com/pricing	     
 	      
-	          (I am not gonna pay 100$(wth) for the commercial license)
+(I am not gonna pay 100$(wth) for the commercial license)
 
 -------------------------------------------------------------
-       Hello, its me "the developer" of this thing:
+Hello, its me "the developer" of this thing:
 
 This Simple python Project is a part of my high school Exhibition (Grade-11 / 2024):
 
@@ -43,13 +47,13 @@ Disclaimer: The Music and some of the Art used in the program is Copyrighted and
 
 -------------------------------------------------------------
 
-		           |------Credits------|
+|------Credits------|
 
 Disclaimer: The Music and some of the Art used in the program is Copyrighted and 
                             I have no License to distribute them :
                { If you want them taken down please contact me : Thanks :) }
 
-		-----Art-----
+-----Art-----
 
 Silly icons ,
 Broken mirror, - The FNF HitSingleReal Team (Artists):
@@ -89,7 +93,7 @@ NMI Tv Screen	       	SPACENAUTICA
 		               ..And Ofcourse Churgney Gurgney
 		                    (Big fan of your work)
 
-		-----Music-----
+-----Music-----
 
 Breakfast (Pause Menu)  -  Kawai Sprite
 Artistic Expression(ChartEditorLoop)  -  Kawai Sprite
@@ -101,11 +105,11 @@ Tea-Time    -   iFlicky
 synthloop(FNF'HD - Menu theme)   -   Composer team(Jellyfish! , JADS , Leukuh/Luc , MarblePawns , Rosebud , Saster , Retrospecter , Kamex , Kazuya , Rozebud , Koharu)
 .. And the (Funkin team) for some sound effects 
 
-		|-------------------|
+|-------------------|
 
 Thanks again to Everyone for making Awesome content XD :
 	 
-	     Quiz_Project 1.3.1 
-    	     @Solidsilvr
-      	    | 2024 |
+Quiz_Project 1.3.1 
+    @Solidsilvr
+     | 2024 |
  
